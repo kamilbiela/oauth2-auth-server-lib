@@ -1,0 +1,10 @@
+import * as swig from "swig";
+import OAuthServerConfig from "./src/oauth/server_config";
+import OAuthRequestHandler from "./src/oauth/request_handler";
+let oAuthServerConfig = new OAuthServerConfig();
+swig.setDefaults({ loader: swig.loaders.fs(__dirname + '/data/template/swig') });
+import TemplatingStrategy from "./src/template/strategy/template_swig";
+import TemplateManager from "./src/template/template_manager";
+export let templatingStrategy = new TemplatingStrategy(swig);
+export let templateManager = new TemplateManager(templatingStrategy);
+export let oAuthRequestHandler = new OAuthRequestHandler(oAuthServerConfig);
