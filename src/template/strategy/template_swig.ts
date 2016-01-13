@@ -12,14 +12,18 @@ export default class TemplatingSwig implements ITemplatingStrategy {
         switch(template) {
             case TemplateEnum.AUTHORIZATION_REQUEST_FORM:
                 return new Promise((resolve, reject) => {
-                    this.swig.renderFile('authorization_request_form.html', {}, function (err, output) {
+                    this.swig.renderFile('authorization_request_form.html', parameters, function(err, output) {
                         if (err) {
-                            reject (err);
+                            return reject(err);
                         }
 
-                        resolve(output);
+                        return resolve(output);
                     });
                 });
+
+            default:
+                throw new Error(`Unrecognized template name value: ${template}`);
+
             break;
         }
     }

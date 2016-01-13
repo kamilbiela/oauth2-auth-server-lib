@@ -1,10 +1,11 @@
-import * as swig from "swig";
-import OAuthServerConfig from "./src/oauth/server_config";
-import OAuthRequestHandler from "./src/oauth/request_handler";
-let oAuthServerConfig = new OAuthServerConfig();
+var swig = require("swig");
+var server_config_1 = require("./src/oauth/server_config");
+var request_handler_1 = require("./src/oauth/request_handler");
+let oAuthServerConfig = new server_config_1.default();
 swig.setDefaults({ loader: swig.loaders.fs(__dirname + '/data/template/swig') });
-import TemplatingStrategy from "./src/template/strategy/template_swig";
-import TemplateManager from "./src/template/template_manager";
-export let templatingStrategy = new TemplatingStrategy(swig);
-export let templateManager = new TemplateManager(templatingStrategy);
-export let oAuthRequestHandler = new OAuthRequestHandler(oAuthServerConfig);
+var template_swig_1 = require("./src/template/strategy/template_swig");
+var template_manager_1 = require("./src/template/template_manager");
+exports.templatingStrategy = new template_swig_1.default(swig);
+exports.templateManager = new template_manager_1.default(exports.templatingStrategy);
+exports.oAuthRequestHandler = new request_handler_1.default(oAuthServerConfig);
+//# sourceMappingURL=services.js.map

@@ -1,5 +1,5 @@
-import * as assert from "assert";
-import * as request from "request";
+var assert = require("assert");
+var request = require("request");
 describe('Test', function () {
     describe('#', function () {
         it('should just work', function (done) {
@@ -10,3 +10,4 @@ describe('Test', function () {
         });
     });
 });
+//# sourceMappingURL=test1.js.map

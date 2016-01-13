@@ -1,4 +1,4 @@
-export default class Client {
+class Client {
     constructor(id, password, secret, type, redirectionEndpointURI) {
         this.id = id;
         this.password = password;
@@ -7,3 +7,5 @@ export default class Client {
         this.redirectionEndpointURI = redirectionEndpointURI;
     }
 }
+exports.Client = Client;
+//# sourceMappingURL=client.js.map

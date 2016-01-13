@@ -1,15 +1,11 @@
+require('source-map-support').install();
+
 import * as Hapi from "hapi";
 import * as url from "url";
 import * as errors from "./src/oauth/errors";
-import Redire
 import {oAuthRequestHandler} from "./services";
 
-enum ClientType {
-    CONFIDENTAL = 1,
-    PUBLIC = 2, // i.e. single page app
-}
-
-
+import RedirectResponse from "./src/oauth/redirect_response";
 
 // class ICodeStore {
 //     protected date = new Date();
@@ -27,7 +23,9 @@ enum ClientType {
 //     }
 // }
 
-
+// =========================================================
+// remove later hapi part and move it to separate repository
+// =========================================================
 var server = new Hapi.Server();
 server.connection({
     host: 'localhost',
@@ -63,7 +61,7 @@ server.route({
     method: ['POST'],
     path:'/token',
     handler: function (req, rep) {
-        oauth.handleAccessTokenRequest(
+        oAuthRequestHandler.handleAccessTokenRequest(
             req.query.grant_type,
             req.query.code,
             req.query.redirect_uri,

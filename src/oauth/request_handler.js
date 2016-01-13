@@ -1,4 +1,7 @@
-export default class RequestHandler {
+var url = require("url");
+var errors = require("./errors");
+var redirect_response_1 = require("./redirect_response");
+class RequestHandler {
     constructor(settings) {
         this.settings = settings;
     }
@@ -16,7 +19,7 @@ export default class RequestHandler {
         if (state) {
             parsedUrl.query.state = state;
         }
-        return new RedirectResponse(url.format(parsedUrl));
+        return new redirect_response_1.default(url.format(parsedUrl));
     }
     handleClientCredentialsGrant() {
     }
@@ -47,3 +50,5 @@ export default class RequestHandler {
         }
     }
 }
+exports.RequestHandler = RequestHandler;
+//# sourceMappingURL=request_handler.js.map

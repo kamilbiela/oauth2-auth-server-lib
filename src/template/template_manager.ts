@@ -5,7 +5,6 @@ export default class TemplateManager {
     constructor(
         protected templatingStrategy: ITemplatingStrategy
     ) {
-
     }
 
     public getAuthorizationRequestForm(responseType, redirectUri, clientId, scope, state) {

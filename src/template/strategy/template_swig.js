@@ -1,20 +1,24 @@
-import TemplateEnum from "../template_enum";
-export default class TemplatingSwig {
+var template_enum_1 = require("../template_enum");
+class TemplatingSwig {
     constructor(swig) {
         this.swig = swig;
     }
     get(template, parameters) {
         switch (template) {
-            case TemplateEnum.AUTHORIZATION_REQUEST_FORM:
+            case template_enum_1.default.AUTHORIZATION_REQUEST_FORM:
                 return new Promise((resolve, reject) => {
-                    this.swig.renderFile('authorization_request_form.html', {}, function (err, output) {
+                    this.swig.renderFile('authorization_request_form.html', parameters, function (err, output) {
                         if (err) {
-                            reject(err);
+                            return reject(err);
                         }
-                        resolve(output);
+                        return resolve(output);
                     });
                 });
+            default:
+                throw new Error(`Unrecognized template name value: ${template}`);
                 break;
         }
     }
 }
+exports.TemplatingSwig = TemplatingSwig;
+//# sourceMappingURL=template_swig.js.map

@@ -1,4 +1,7 @@
+import * as url from "url";
 import ServerConfig from "./server_config";
+import * as errors from "./errors";
+import RedirectResponse from "./redirect_response";
 
 export default class RequestHandler {
     constructor(
