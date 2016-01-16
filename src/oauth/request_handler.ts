@@ -1,53 +1,13 @@
 import * as url from "url";
 import ServerConfig from "./server_config";
 import * as errors from "./errors";
-import RedirectResponse from "./redirect_response";
+import IResponse from "./response/iresponse";
+import RedirectResponse from "./response/redirect_response";
 
 export default class RequestHandler {
     constructor(
         private settings: ServerConfig
-    ) {
-
-    }
-
-    // 4.1
-    private handleAuthorizationCodeGrantRequest(
-        responseType: string,
-        clientId: string, // REQUIRED.  The client identifier as described in Section 2.2.
-        redirectUri: string = null, //  OPTIONAL.  As described in Section 3.1.2.
-        scope: string = null, //  OPTIONAL.  As described in Section 3.1.2.
-        state: string = null // RECOMMENDED. The parameter SHOULD be used for preventing cross-site request forgery as described in Section 10.12.
-    ) {
-        if (typeof redirectUri !== "string" || redirectUri.length === 0) {
-            throw new errors.InvalidRequestRedirectUriError();
-        }
-
-        if (typeof clientId !== "string" || clientId.length === 0) {
-            throw new errors.InvalidRequestError();
-        }
-
-        // scope, see section 3.3
-        // check client_id
-        // display form
-        // make auth
-        // redirect
-        // parse redirect uri, strip data and redirect
-        let parsedUrl = url.parse(redirectUri, true);
-        delete parsedUrl.hash;
-        delete parsedUrl.search;
-        parsedUrl.query.code = "ABCDzRANOMzCODEzTODO";
-        if (state) {
-            parsedUrl.query.state = state;
-        }
-
-        return new RedirectResponse(url.format(parsedUrl));
-    }
-
-    // 4.4
-
-    private handleClientCredentialsGrant() {
-
-    }
+    ) {}
 
     // handle GET, POST, must be https
     handleAuthorizationRequest(
@@ -56,12 +16,8 @@ export default class RequestHandler {
         clientId: string,
         scope: string = null,
         state: string = null
-    ) {
+    ): IResponse {
         try {
-            if (typeof responseType !== "string") {
-                throw new errors.InvalidRequestError();
-            }
-
             if (typeof responseType !== "string") {
                 throw new errors.InvalidRequestError();
             }
@@ -103,6 +59,48 @@ export default class RequestHandler {
         // display login form, auth user.
 
         // redirect to redirectionEndpointURI
+    }
+
+
+    // 4.1
+    private handleAuthorizationCodeGrantRequest(
+        responseType: string,
+        clientId: string, // REQUIRED.  The client identifier as described in Section 2.2.
+        redirectUri: string = null, //  OPTIONAL.  As described in Section 3.1.2.
+        scope: string = null, //  OPTIONAL.  As described in Section 3.1.2.
+        state: string = null // RECOMMENDED. The parameter SHOULD be used for preventing cross-site request forgery as described in Section 10.12.
+    ) {
+        if (typeof redirectUri !== "string" || redirectUri.length === 0) {
+            console.log("1");
+            throw new errors.InvalidRequestRedirectUriError();
+        }
+
+        if (typeof clientId !== "string" || clientId.length === 0) {
+            console.log("2");
+            throw new errors.InvalidRequestError();
+        }
+console.log("123");
+        // scope, see section 3.3
+        // check client_id
+        // display form
+        // make auth
+        // redirect
+        // parse redirect uri, strip data and redirect
+        let parsedUrl = url.parse(redirectUri, true);
+        delete parsedUrl.hash;
+        delete parsedUrl.search;
+        parsedUrl.query.code = "ABCDzRANOMzCODEzTODO";
+        if (state) {
+            parsedUrl.query.state = state;
+        }
+
+        return new RedirectResponse(url.format(parsedUrl));
+    }
+
+    // 4.4
+
+    private handleClientCredentialsGrant() {
+
     }
 
     handeResourceOwnerPasswordCredentialsGrant() {

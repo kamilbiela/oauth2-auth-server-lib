@@ -11,7 +11,7 @@ export default class TemplatingSwig implements ITemplatingStrategy {
     get(template: TemplateEnum, parameters: {[key: string]: string}): Promise<string> {
         switch(template) {
             case TemplateEnum.AUTHORIZATION_REQUEST_FORM:
-                return new Promise((resolve, reject) => {
+                return new Promise<string>((resolve, reject) => {
                     this.swig.renderFile('authorization_request_form.html', parameters, function(err, output) {
                         if (err) {
                             return reject(err);

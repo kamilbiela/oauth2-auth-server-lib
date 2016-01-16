@@ -8,7 +8,8 @@ import * as url from "url";
 import * as errors from "./src/oauth/errors";
 import {oAuthRequestHandler} from "./services";
 
-import RedirectResponse from "./src/oauth/redirect_response";
+import RedirectResponse from "./src/oauth/response/redirect_response";
+import HtmlResponse from "./src/oauth/response/html_response";
 
 // class ICodeStore {
 //     protected date = new Date();
@@ -53,8 +54,13 @@ server.route({
                 return rep("").redirect(result.redirectTo);
             }
 
-            return rep("err err err").code(503);
+            if (result instanceof HtmlResponse) {
+                return rep(result.hmtl);
+            }
+
+            return rep("Error").code(503);
         } catch (e) {
+            console.log("Exception catch");
             return rep(e.message);
         }
     }

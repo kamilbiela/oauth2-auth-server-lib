@@ -1,6 +1,6 @@
 import * as swig from "swig";
 import OAuthServerConfig from "./src/oauth/server_config";
-import OAuthRedirectResponse from "./src/oauth/redirect_response";
+import OAuthRedirectResponse from "./src/oauth/response/redirect_response";
 import OAuthRequestHandler from "./src/oauth/request_handler";
 
 // load some config here

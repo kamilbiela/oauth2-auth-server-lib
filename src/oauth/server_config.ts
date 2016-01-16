@@ -1,7 +1,7 @@
 export default class ServerConfig {
-    alwaysRequireRedirectUri: boolean
+    alwaysRequireRedirectUri: boolean = true
 
     // "scope" param settings
-    failRequestWhenScopeOmitted: boolean
-    omittedScopeDefaultValue: string
+    failRequestWhenScopeOmitted: boolean = false
+    omittedScopeDefaultValue: string = ""
 }
