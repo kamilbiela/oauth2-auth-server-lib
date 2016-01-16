@@ -1,3 +1,6 @@
+"use strict";
+require('use-strict');
+require('es6-promise').polyfill();
 require('source-map-support').install();
 
 import * as Hapi from "hapi";

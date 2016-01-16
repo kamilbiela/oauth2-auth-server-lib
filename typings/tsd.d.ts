@@ -4,6 +4,7 @@
 /// <reference path="request/request.d.ts" />
 /// <reference path="hapi/hapi.d.ts" />
 /// <reference path="swig/swig.d.ts" />
+/// <reference path="bluebird/bluebird.d.ts" />
 
 declare module "Hapi" {
     var x: any;
