@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import RequestHandler from "../../src/oauth/request_handler";
 import ServerConfig from "../../src/oauth/server_config";
+import * as errors from "../../src/oauth/errors";
 
 describe('RequestHandler', () => {
     describe('authorization request', () => {
@@ -12,16 +13,19 @@ describe('RequestHandler', () => {
             requestHandler = new RequestHandler(serverConfig);
         });
 
-        it('', () => {
+        it('should throw exception on wrong response_type', () => {
+            let response;
             try {
-                let response = requestHandler.handleAuthorizationRequest(
+                response = requestHandler.handleAuthorizationRequest(
                     "code_not", "http://redirect", "client1"
                 );
             } catch (e) {
-                return assert.fail();
+                return assert.ok(e instanceof errors.UnsupportedResponseTypeError, "Should throw UnsupportedResponseTypeError on wrong response type value");
             }
 
-            assert.ok(true);
+            assert.ok(response, "Response can't be null / undefined / false");
+
+            assert.fail(null, null, "Should throw an exception");
         });
     });
 });

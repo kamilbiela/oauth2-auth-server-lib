@@ -17,21 +17,17 @@ export default class RequestHandler {
         scope: string = null,
         state: string = null
     ): IResponse {
-        try {
-            if (typeof responseType !== "string") {
-                throw new errors.InvalidRequestError();
-            }
 
-            if (responseType === "code") {
-                return this.handleAuthorizationCodeGrantRequest(responseType, clientId, redirectUri, scope, state);
-            } else {
-                throw new errors.UnsupportedResponseTypeError();
-            }
-        } catch (e) {
-            if (e instanceof errors.InvalidRequestError) {
-
-            }
+        if (typeof responseType !== "string") {
+            throw new errors.InvalidRequestError();
         }
+
+        if (responseType === "code") {
+            return this.handleAuthorizationCodeGrantRequest(responseType, clientId, redirectUri, scope, state);
+        } else {
+            throw new errors.UnsupportedResponseTypeError();
+        }
+
         // 3.1.2.2.  Registration Requirements
         //
         // The authorization server MUST require the following clients to
